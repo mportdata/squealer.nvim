@@ -1,10 +1,18 @@
+WITH baz AS (
+  SELECT 
+    a, 
+    c 
+  FROM foo 
+  WHERE a = 1
+) 
+
 SELECT 
-  FIRST_NAME, LAST_NAME
-FROM
-  CLUBCARD_HOLDERS
-WHERE
-  AGE BETWEEN 34 AND 42
-AND 
-  YEAR = 2024
-ORDER BY
-  CLUBCARD_POINTS_TOTAL;
+  f.a, 
+  b.b, 
+  baz.c, 
+  CAST("b"."a" AS REAL) d 
+FROM foo f 
+JOIN bar b 
+ON f.a = b.a 
+LEFT JOIN baz 
+ON f.a = baz.a
