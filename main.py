@@ -20,7 +20,7 @@ class SqlTranspiler:
             with open(current_file, "r") as f:
                 sql = f.read()
 
-            detected_dialect = "ansi"  # You can improve detection logic
+            detected_dialect = None  # You can improve detection logic
             transpiled_sql = sqlglot.transpile(sql, read=detected_dialect, write=target_dialect)[0]
 
             output_file = f"{os.path.splitext(current_file)[0]}_{target_dialect}.sql"
