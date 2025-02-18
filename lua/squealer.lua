@@ -17,12 +17,18 @@ function M.pick_dialect()
 				map("i", "<CR>", function(bufnr)
 					local selection = action_state.get_selected_entry()
 					actions.close(bufnr)
-					vim.cmd("TranspileSQL " .. selection[1])
+
+					-- Save selected dialect in a Neovim variable for Python to read
+					vim.api.nvim_set_var("squealer_selected_dialect", selection[1])
 				end)
 				return true
 			end,
 		})
 		:find()
 end
+
+vim.api.nvim_create_user_command("SquealerPickDialect", function()
+	M.pick_dialect()
+end, {})
 
 return M
