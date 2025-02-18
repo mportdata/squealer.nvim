@@ -7,9 +7,16 @@ class SqlTranspiler:
     def __init__(self, nvim):
         self.nvim = nvim
 
-    @pynvim.command('TranspileSQL', nargs='1', sync=True)
+    @pynvim.command('TranspileSQL', nargs='?', sync=True)
     def transpile_sql(self, args):
-        target_dialect = args[0]
+        """Transpiles SQL to the given dialect"""
+        if not args or not args[0]:  # If no dialect is provided, pick one
+            self.select_dialect_then_transpile()
+        else:
+            self._run_transpiler(args[0])
+
+    def _run_transpiler(self, target_dialect):
+        """Handles SQL transpilation"""
         current_file = self.nvim.current.buffer.name
 
         if not current_file:
@@ -30,3 +37,18 @@ class SqlTranspiler:
             self.nvim.out_write(f"Transpiled SQL saved to {output_file}\n")
         except Exception as e:
             self.nvim.err_write(f"Error: {e}\n")
+
+    def select_dialect_then_transpile(self):
+        """Triggers the Telescope picker and captures the selected dialect"""
+        self.nvim.command("SquealerPickDialect")  # Calls the Lua function
+
+        # Listen for the user's selection (Telescope picker sets a Neovim variable)
+        @self.nvim.async_call
+        def check_dialect():
+            selected_dialect = self.nvim.vars.get("squealer_selected_dialect", None)
+            if selected_dialect:
+                self._run_transpiler(selected_dialect)
+
+        # Delay checking for the selected dialect
+        self.nvim.call("timer_start", 500, check_dialect)
+
