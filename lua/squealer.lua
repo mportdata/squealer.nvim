@@ -59,7 +59,7 @@ function M.transpile_sql()
 end
 
 function M.setup()
-	vim.api.nvim_create_user_command("SquealerPickDialect", M.pick_dialect, {})
+	vim.api.nvim_create_user_command("SquealerPickDialect", M.transpile_sql(), {})
 	print("Squealer plugin loaded successfully!")
 end
 
