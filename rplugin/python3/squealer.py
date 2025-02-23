@@ -36,7 +36,7 @@ class SqlTranspiler:
             with open(output_file, "w") as f:
                 f.write(transpiled_sql)
             self.nvim.command("redraw!")
-            self.nvim.out_write(f"SQL transpiled to {target_dialect} in-place.\n")
+            self.nvim.out_write(f"SQL transpiled to {target_dialect} in-place.\n With prettifier.\n")
         except Exception as e:
             self.nvim.err_write(f"Unexpected error: {e}\n")
 
