@@ -25,7 +25,12 @@ class SqlTranspiler:
         try:
             # Read from buffer instead of file for latest changes
             sql = "\n".join(self.nvim.current.buffer[:])
-            transpiled_sql = sqlglot.transpile(sql, read=None, write=target_dialect)[0]
+            transpiled_sql = sqlglot.transpile(
+                sql, 
+                read=None, 
+                write=target_dialect,
+                pretty=True
+            )[0]
 
             output_file = f"{os.path.splitext(current_file)[0]}.sql"
             with open(output_file, "w") as f:
