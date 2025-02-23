@@ -27,15 +27,11 @@ class SqlTranspiler:
             sql = "\n".join(self.nvim.current.buffer[:])
             transpiled_sql = sqlglot.transpile(sql, read=None, write=target_dialect)[0]
 
-            output_file = f"{os.path.splitext(current_file)[0]}_{target_dialect}.sql"
-            if os.path.exists(output_file):
-                output_file = f"{os.path.splitext(current_file)[0]}_{target_dialect}_{int(time.time())}.sql"
+            output_file = f"{os.path.splitext(current_file)[0]}.sql"
             with open(output_file, "w") as f:
                 f.write(transpiled_sql)
 
             self.nvim.out_write(f"Transpiled SQL saved to {output_file}\n")
-        except sqlglot.errors.ParseError as e:
-            self.nvim.err_write(f"SQL parsing error: {e}\n")
         except Exception as e:
             self.nvim.err_write(f"Unexpected error: {e}\n")
 
