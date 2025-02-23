@@ -13,9 +13,9 @@ class SqlTranspiler:
         if not args or not args[0]:  # If no dialect is provided, trigger picker
             self.nvim.command("SquealerPickDialect")
         else:
-            self._run_transpiler(args[0])
+            self._run_transpiler(args[0], args[1])
 
-    def _run_transpiler(self, target_dialect):
+    def _run_transpiler(self, source_dialect, target_dialect):
         """Handles SQL transpilation"""
         current_file = self.nvim.current.buffer.name
         if not current_file:
@@ -27,7 +27,7 @@ class SqlTranspiler:
             sql = "\n".join(self.nvim.current.buffer[:])
             transpiled_sql = sqlglot.transpile(
                 sql, 
-                read=None, 
+                read=source_dialect, 
                 write=target_dialect,
                 pretty=True
             )[0]
@@ -36,7 +36,7 @@ class SqlTranspiler:
             with open(output_file, "w") as f:
                 f.write(transpiled_sql)
             self.nvim.command("redraw!")
-            self.nvim.out_write(f"SQL transpiled to {target_dialect} in-place.\n With prettifier.\n")
+            self.nvim.out_write(f"SQL transpiled from {source_dialect} to {target_dialect}.\n")
         except Exception as e:
             self.nvim.err_write(f"Unexpected error: {e}\n")
 
