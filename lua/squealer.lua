@@ -36,10 +36,11 @@ function M.pick_target_dialect(source_dialect)
 					local target_selection = action_state.get_selected_entry()[1]
 					actions.close(bufnr)
 					vim.api.nvim_command(
-						"TranspileSQL "
+						"TranspileSQL '"
 							.. vim.fn.shellescape(source_dialect)
-							.. " "
+							.. "' '"
 							.. vim.fn.shellescape(target_selection)
+							.. "'"
 					)
 				end)
 				return true
