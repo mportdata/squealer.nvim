@@ -10,7 +10,7 @@ class SqlTranspiler:
     @pynvim.command('TranspileSQL', nargs='?', sync=True)
     def transpile_sql(self, args):
         """Transpiles SQL to the given dialect"""
-        if not args or len(args) < 2:    
+        if not args:    
             self.nvim.command("SquealerPickDialect")
         else:
             self._run_transpiler(args[0]) 
