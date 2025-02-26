@@ -13,7 +13,7 @@ class SqlTranspiler:
         if not args or len(args) < 1:    
             self.nvim.command("SquealerPickDialect")
         else:
-            self._run_transpiler(args[0]) 
+            self._run_transpiler(args) 
 
     def _run_transpiler(self, dialects):
         dialects_array = dialects.split(' ')
