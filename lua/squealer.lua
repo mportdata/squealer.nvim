@@ -33,15 +33,11 @@ function M.pick_target_dialect(source_dialect)
 			sorter = require("telescope.config").values.generic_sorter({}),
 			attach_mappings = function(_, map)
 				map("i", "<CR>", function(bufnr)
-					local target_selection = action_state.get_selected_entry()[1]
+					local target_dialect = action_state.get_selected_entry()[1]
 					actions.close(bufnr)
-					vim.api.nvim_command(
-						"TranspileSQL '"
-							.. vim.fn.shellescape(source_dialect)
-							.. "' '"
-							.. vim.fn.shellescape(target_selection)
-							.. "'"
-					)
+					local command_string = "TranspileSQL " .. source_dialect .. " " .. target_dialect
+					print("Running the following command ", command_string)
+					vim.api.nvim_command(command_string)
 				end)
 				return true
 			end,
