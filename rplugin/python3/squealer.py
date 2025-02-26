@@ -21,10 +21,6 @@ class SqlTranspiler:
         else:
             source_dialect = dialects_array[0]
             target_dialect = dialects_array[1]
-            current_file = self.nvim.current.buffer.name
-            if not current_file:
-                self.nvim.err_write("No file open.\n")
-                return
 
             try:
                 # Read from buffer instead of file for latest changes
@@ -36,9 +32,6 @@ class SqlTranspiler:
                     pretty=True
                 )[0]
 
-                #output_file = f"{os.path.splitext(current_file)[0]}.sql"
-                #with open(output_file, "w") as f:
-                #    f.write(transpiled_sql)
                 self.nvim.current.buffer[:] = transpiled_sql.splitlines()
                 self.nvim.command("redraw!")
                 self.nvim.out_write(f"SQL transpiled from {source_dialect} to {target_dialect} in-place.\n")
