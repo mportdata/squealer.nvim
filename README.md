@@ -8,7 +8,9 @@ A [neovim](https://github.com/neovim/neovim) plugin that uses [SQLGlot](https://
 
 #### Configure Python Virtual Environment
 
-##### Install Python, Rust and create the virtual environment using MacOS
+##### Install Python and Rust then create the Python virtual environment to be used by [lazy.nvim](https://github.com/folke/lazy.nvim)
+
+###### MacOS
 ```
 brew install rust
 brew install python
