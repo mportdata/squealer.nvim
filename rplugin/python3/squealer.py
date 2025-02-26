@@ -41,7 +41,7 @@ class SqlTranspiler:
                 output_file = f"{os.path.splitext(current_file)[0]}.sql"
                 with open(output_file, "w") as f:
                     f.write(transpiled_sql)
-                current_buffer[:] = transpiled_sql.splitlines()
+                self.nvim.current.buffer[:] = transpiled_sql.splitlines()
                 self.nvim.command("redraw!")
                 self.nvim.out_write("Debug: Redraw done\n")
                 self.nvim.out_write(f"SQL transpiled from {source_dialect} to {target_dialect} in-place.\n")
