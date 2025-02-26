@@ -2,6 +2,8 @@
 
 A [neovim](https://github.com/neovim/neovim) plugin that uses [SQLGlot](https://github.com/tobymao/sqlglot) to transpile between SQL dialects.
 
+![](squealer-demo.gif)
+
 ## Install
 
 ### Using [lazy.nvim](https://github.com/folke/lazy.nvim)
