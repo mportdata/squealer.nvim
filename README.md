@@ -1,4 +1,4 @@
-# squealer.nvim
+# 🐷 squealer.nvim 🐷
 
 A [neovim](https://github.com/neovim/neovim) plugin that uses [SQLGlot](https://github.com/tobymao/sqlglot) to transpile between SQL dialects.
 
