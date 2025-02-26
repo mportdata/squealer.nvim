@@ -7,7 +7,7 @@ class SqlTranspiler:
     def __init__(self, nvim):
         self.nvim = nvim
 
-    @pynvim.command('TranspileSQL', nargs='1', sync=True)
+    @pynvim.command('TranspileSQL', nargs='?', sync=True)
     def transpile_sql(self, args):
         print(f"RUNNING TRANSPILE SQL WITH CURRENT ARGS {args}")
         if not args or len(args) < 1:    
