@@ -9,11 +9,11 @@ class SqlTranspiler:
 
     @pynvim.command('TranspileSQL', nargs='?', sync=True)
     def transpile_sql(self, args):
-        print(f"RUNNING TRANSPILE SQL WITH CURRENT ARGS {args}")
-        if not args or len(args) < 1:    
+        """Transpiles SQL to the given dialect"""
+        if not args or len(args) < 2:    
             self.nvim.command("SquealerPickDialect")
         else:
-            self._run_transpiler(args) 
+            self._run_transpiler(args[0]) 
 
     def _run_transpiler(self, dialects):
         dialects_array = dialects.split(' ')
@@ -22,6 +22,7 @@ class SqlTranspiler:
         else:
             source_dialect = dialects_array[0]
             target_dialect = dialects_array[1]
+            """Handles SQL transpilation"""
             current_file = self.nvim.current.buffer.name
             if not current_file:
                 self.nvim.err_write("No file open.\n")
