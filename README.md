@@ -10,11 +10,10 @@ A [neovim](https://github.com/neovim/neovim) plugin that uses [SQLGlot](https://
 
 #### Configure Python Virtual Environment
 
-##### Install Python and Rust then create the Python virtual environment to be used by [lazy.nvim](https://github.com/folke/lazy.nvim)
+##### Install Python then create the Python virtual environment to be used by [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ###### MacOS
 ```
-brew install rust
 brew install python
 mkdir -p ~/.local/venv
 python3 -m venv ~/.local/venv/nvim
